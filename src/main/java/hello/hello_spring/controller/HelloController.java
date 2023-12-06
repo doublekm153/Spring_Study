@@ -15,6 +15,7 @@ public class HelloController {
     * model에 data라는 이름으로 hello!!를 담아서 view에 넘긴다.
     * view에서는 model에 담긴 값을 꺼내서 사용할 수 있다.
     * view는 resources/templates/hello.html
+    *
     * model.addAttribute 에서 hello 객체를 data 이름으로 추가한다.
     * 뷰 코드에서 data 로 지정한 이름을 통해서 hello 를 사용한다.
     * */
