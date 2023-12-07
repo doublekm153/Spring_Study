@@ -5,27 +5,38 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
+  /*
+  * @Controller 는 스프링이 실행될 때 해당 클래스를 스캔해서 객체를 생성하고 스프링 컨테이너에 넣어둔다.
+  *
+  * @GetMapping 은 사용자가 localhost:8080/hello 라고 요청을 보내면
+  * hello 라는 메서드가 처리하도록 지정한다.
+  *
+  * 웹 애플리케이션에서 /hello 라고 검색하면 해당 메서드가 호출
+  *
+  * Model 은 Controller 와 View 사이에 데이터를 전달하는 역할을 하는 객체.
+  * Model 인터페이스는 addAttribute 메서드 제공.
+  * 해당 메서드를 통해 데이터를 추가하면 뷰에서 이 데이터를 참조할 수 있음.
+  * 즉, 컨트롤러에서 뷰로 데이터를 넘겨주는 역할.
+  *
+  * model 은 Model 인터페이스의 객체의 참조 변수.
+  * 해당 변수를 통해 Model 인터페이스의 메서드에 접근할 수 있음.
+  *
+  * model에 data라는 이름으로 hello!!를 담아서 view에 넘긴다.
+  * view에서는 model에 담긴 값을 꺼내서 사용할 수 있다.
+  * view는 resources/templates/hello.html
+  *
+  * model.addAttribute 에서 hello 객체를 data 이름으로 추가한다.
+  * 뷰 코드에서 data 로 지정한 이름을 통해서 hello 를 사용한다.
+  *
+  * return 값이 resources/templates/hello.html
+  * 즉, hello 란, templates/hello.html 을 찾아서 렌더링한다.
+  * */
 @Controller
 public class HelloController {
-
-//  웹 애플리케이션에서 /hello 라고 검색하면 해당 메서드가 호출
   @GetMapping("hello")
   public String hello(Model model) {
-    /*
-    * model에 data라는 이름으로 hello!!를 담아서 view에 넘긴다.
-    * view에서는 model에 담긴 값을 꺼내서 사용할 수 있다.
-    * view는 resources/templates/hello.html
-    *
-    * model.addAttribute 에서 hello 객체를 data 이름으로 추가한다.
-    * 뷰 코드에서 data 로 지정한 이름을 통해서 hello 를 사용한다.
-    * */
-    
     model.addAttribute("data", "hello!!");
-    
-    /*
-    * return 값이 resources/templates/hello.html
-    * 즉, hello 란, templates/hello.html 을 찾아서 렌더링한다.
-    * */
     return "hello";
   }
   
