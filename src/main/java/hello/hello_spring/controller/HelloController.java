@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
-  /*
+/*
   * @Controller 는 스프링이 실행될 때 해당 클래스를 스캔해서 객체를 생성하고 스프링 컨테이너에 넣어둔다.
   *
   * @GetMapping 은 사용자가 localhost:8080/hello 라고 요청을 보내면
   * hello 라는 메서드가 처리하도록 지정한다.
-  *
   * 웹 애플리케이션에서 /hello 라고 검색하면 해당 메서드가 호출
   *
   * Model 은 Controller 와 View 사이에 데이터를 전달하는 역할을 하는 객체.
@@ -62,9 +62,25 @@ public class HelloController {
   * 이 값을 data 라는 이름으로 뷰에 전달.
   * 뷰에서는 ${data} 로 값을 사용.
   * */
+  
   @GetMapping("hello-mvc")
   public String helloMvc(@RequestParam("test") String spring, Model model) {
     model.addAttribute("data", spring);
     return "hello-template";
+  }
+  
+  /*
+  * localhost:8080/hello-string?test=안녕 이라고 입력하면
+  * 웹 페이지에는 hello안녕 이라는 값이 출력된다.
+  * @ResponseBody 는 http 응답에 이 데이터를 직접 넣어주겠다는 의미.
+  * http 통신 프로토콜은 헤더부 + 바디부로 이루어져 있음.
+  * @ResponseBody 를 사용하면 바디부에 return 값이 그대로 들어간다.
+  * 페이지에서 소스를 보면 html 태그 같은 것이 없고, return 값이 그대로 들어간다.
+  * */
+  
+  @GetMapping("hello-string")
+  @ResponseBody
+  public String helloString(@RequestParam("test") String spring) {
+    return "hello" + spring;
   }
 }
