@@ -83,4 +83,49 @@ public class HelloController {
   public String helloString(@RequestParam("test") String spring) {
     return "hello" + spring;
   }
+  
+  /*
+  * api 방식은 객체를 반환하는 것. (JSON 방식)
+  * localhost:8080/hello-api?test=안녕 이라고 입력하면
+  * 웹 페이지에는 {"name":"안녕"} 이라는 값이 출력된다.
+  * Hello 클래스는 name 이라는 필드를 가지고 있음.
+  * name 필드를 가져오는 getName, 변경할 수 있는 setName 메서드를 가지고 있음.
+  * 즉, Hello 클래스는 name 필드를 가지고 있고,
+  * name 필드를 가져오는 getName, 변경할 수 있는 setName 메서드를 가지고 있음.
+  * Hello 클래스를 만들고, hello 라는 변수를 생성.
+  * hello.setName(spring) 에서 setName 은 Hello 클래스에서 정의한 메서드.
+  * setName 메서드는 Hello 클래스의 name 필드를 설정하는 역할.
+  * spring 은 helloApi 메서드의 매개변수.
+  * String spring 에서의 spring 값이 setName 메서드의 매개변수로 전달.
+  * 즉, "안녕" 이라는 값이 setName 메서드의 매개변수로 전달.
+  * @ResponseBody 는 http 응답에 이 데이터를 직접 넣어주겠다는 의미.
+  * http 통신 프로토콜은 헤더부 + 바디부로 이루어져 있음.
+  * @ResponseBody 를 사용하면 바디부에 return 값이 그대로 들어간다.
+  * 페이지에서 소스를 보면 html 태그 같은 것이 없고, return 값이 그대로 들어간다.
+  * @ResponseBody 어노테이션이 붙은 메서드에서 객체를 반환하면,
+  * 스프링 MVC 는 이 객체를 HTTP 응답의 본문에 쓰기 위해 JSON 형태로 변환.
+  * 이런 경우, Hello 객체는 { "name": "안녕" } 이라는 JSON 응답을 만들어냄.
+  */
+  
+  @GetMapping("hello-api")
+  @ResponseBody
+  public Hello helloApi(@RequestParam("test") String spring) {
+    Hello hello = new Hello();
+    hello.setName(spring);
+    return hello;
+  }
+  
+  static class Hello {
+    private String name;
+    
+//    꺼낼 때는 getName 사용
+    public String getName() {
+      return name;
+    }
+    
+//    넣을 때는 setName 사용
+    public void setName(String name) {
+      this.name = name;
+    }
+  }
 }
