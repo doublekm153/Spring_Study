@@ -102,7 +102,7 @@ public class HelloController {
   * http 통신 프로토콜은 헤더부 + 바디부로 이루어져 있음.
   * @ResponseBody 를 사용하면 바디부에 return 값이 그대로 들어간다.
   * 페이지에서 소스를 보면 html 태그 같은 것이 없고, return 값이 그대로 들어간다.
-  * @ResponseBody 어노테이션이 붙은 메서드에서 객체를 반환하면,
+  * @ResponseBody 어노테이션이 붙은 메서드에서 "객체" 를 반환하면,
   * 스프링 MVC 는 이 객체를 HTTP 응답의 본문에 쓰기 위해 JSON 형태로 변환.
   * 이런 경우, Hello 객체는 { "name": "안녕" } 이라는 JSON 응답을 만들어냄.
   */
